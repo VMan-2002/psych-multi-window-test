@@ -84,6 +84,7 @@ import openfl.geom.Matrix;
 import openfl.geom.Rectangle;
 import openfl.display.Sprite;
 import openfl.utils.Assets;
+import window.windowMod.FlxWindowModifier;
 
 using StringTools;
 
@@ -1411,10 +1412,6 @@ class PlayState extends MusicBeatState
 		Paths.clearUnusedMemory();
 		
 		CustomFadeTransition.nextCamera = camOther;
-		
-		if (curStage == 'transp') {
-			popupWindow(1280, 720, 500, 'Testing Testing');
-		}
 	}
 
 	#if (!flash && sys)
@@ -2108,6 +2105,27 @@ class PlayState extends MusicBeatState
 
 	public function startCountdown():Void
 	{
+		
+		if (curStage == 'transp') {
+			//popupWindow(1280, 720, 500, 'Testing Testing');
+			FlxWindowModifier.popUpWindow({
+				allowHighDPI:true,
+				borderless:false,
+				width:180,
+				height:180,
+				alwaysOnTop:true,
+				title:"Bro gaming",
+				frameRate:120,
+				fullscreen:false,
+				hidden:false,
+				maximized:false,
+				minimized:false,
+				resizable:true,
+				x:0,
+				y:0
+			}, FlxColor.BLUE, 50, 50, "shared/images/stageback");
+		}
+
 		if(startedCountdown) {
 			callOnLuas('onStartCountdown', []);
 			return;
@@ -3338,7 +3356,7 @@ class PlayState extends MusicBeatState
 		callOnLuas('onUpdatePost', [elapsed]);
 		
 		if (curStage == 'transp') {
-			@:privateAccess
+			/*@:privateAccess
 			var dadFrame = dad._frame;
 			
 			if (dadFrame == null || dadFrame.frame == null) return; // prevents crashes (i think???)
@@ -3347,7 +3365,7 @@ class PlayState extends MusicBeatState
 			
 			dadScrollWin.scrollRect = rect;
 			dadScrollWin.x = (((dadFrame.offset.x) - (dad.offset.x / 2)) * dadScrollWin.scaleX);
-			dadScrollWin.y = (((dadFrame.offset.y) - (dad.offset.y / 2)) * dadScrollWin.scaleY);        
+			dadScrollWin.y = (((dadFrame.offset.y) - (dad.offset.y / 2)) * dadScrollWin.scaleY);     */   
 		}
 	}
 
